@@ -1,24 +1,30 @@
-# README
+# Library Management System
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Requirements
 
-Things you may want to cover:
+* **Rails 7.2**
+* **Ruby 3.3.1**
+* **SQLite**
 
-* Ruby version
+### Gems used
+* devise
+* devise-jwt
+* pundit
+* rspec-rails
+* factory_bot_rails
+* faker
 
-* System dependencies
+### Basic Structure
+* As Librarian and Member are user types, a User parent class was created with an attribute role, which can be :librarian or :member
+defined in an enum within User class
+* To add permissions to what a user can or cannot do, a book policy was created, in order to validate which actions are allowed for each type of user
+* To authenticate first the user needs to send a post request to `login` endpoint, it will return a token which can be used to send further requests to the other endpoints
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Improvements opportunity
+* Create an API error handling to track better errors and return more user friendly messages
+* Created serializer models to serialize objects and build responses
+* Create an STI polimorphic user table instead of a role attribute
+* Move some logic from user class to its child classes, so it would avoid checking user type like in dashboards imdex action
+* Move book policy and sessions to be under api/v1 namespace
+* User more logs to register important steps
+* Use docker
