@@ -1,4 +1,28 @@
 Rails.application.routes.draw do
+  devise_for :users, path: "", path_names: {
+    sign_in: "login",
+    sign_out: "logout"
+  },
+  controllers: { sessions: "sessions" },
+  defaults: { format: :json }
+
+  namespace :api do
+    namespace :v1 do
+      resources :books, only: %i[index show create update destroy] do
+        resources :borrowings, only: %i[create]
+        collection do
+          get "search"
+        end
+        member do
+          post "borrow"
+          post "return"
+        end
+      end
+      resources :borrowings, only: %i[index show update destroy]
+      resources :dashboards, only: [ :index ]
+    end
+  end
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
