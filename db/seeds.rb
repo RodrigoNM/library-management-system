@@ -7,3 +7,16 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+Librarian.create(email: 'librarian@example.com', password: 'password')
+Member.create(email: 'member@example.com', password: 'password')
+
+5.times do
+  Book.create(
+    title: Faker::Book.title,
+    author: Faker::Book.author,
+    genre: Faker::Book.genre,
+    isbn: Faker::Number.unique.number(digits: 13).to_s,
+    total_copies: Faker::Number.between(from: 1, to: 100)
+  )
+end
