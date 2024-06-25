@@ -28,3 +28,7 @@ defined in an enum within User class
 * Move book policy and sessions to be under api/v1 namespace
 * User more logs to register important steps
 * Use docker
+
+### Notes
+* This is a rails api only project
+* No views were created because there are too much business rules and specs to be implemented within the time range to acomplish the challenge
